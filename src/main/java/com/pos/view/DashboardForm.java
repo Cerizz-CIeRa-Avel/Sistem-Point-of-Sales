@@ -25,6 +25,10 @@ public class DashboardForm extends JFrame {
             formBarang.setVisible(true);
         });
         JMenuItem itemPelanggan = new JMenuItem("Pelanggan");
+        itemPelanggan.addActionListener(e -> {
+            PelangganForm formPelanggan = new PelangganForm(this);
+            formPelanggan.setVisible(true);
+        });
         
         JMenu menuTransaksi = new JMenu("Transaksi");
         JMenuItem itemPenjualan = new JMenuItem("Penjualan Baru");
