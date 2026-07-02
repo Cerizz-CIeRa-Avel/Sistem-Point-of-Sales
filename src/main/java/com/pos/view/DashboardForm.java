@@ -40,6 +40,10 @@ public class DashboardForm extends JFrame {
             formTransaksi.setVisible(true);
         });
         JMenuItem itemRiwayat = new JMenuItem("Riwayat Penjualan");
+        itemRiwayat.addActionListener(e -> {
+            RiwayatForm formRiwayat = new RiwayatForm(this);
+            formRiwayat.setVisible(true);
+        });
 
         menuMaster.add(itemBarang);
         menuMaster.add(itemPelanggan);

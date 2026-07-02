@@ -8,6 +8,8 @@ import com.pos.database.DatabaseConnection;
 import com.pos.entity.DetailTransaksi;
 import com.pos.entity.Transaksi;
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class TransaksiRepository {
     private final Connection conn;
@@ -86,5 +88,34 @@ public class TransaksiRepository {
             // KEMBALIKAN STATUS AUTO-COMMIT KE NORMAL
             conn.setAutoCommit(true); 
         }
+    }
+    
+    // Fungsi baru untuk mengambil riwayat penjualan menggunakan JOIN
+    public java.util.List<Object[]> getSemuaRiwayat() {
+        java.util.List<Object[]> listRiwayat = new java.util.ArrayList<>();
+        
+        // Kueri ini membuktikan struktur relasional database yang baik
+        String sql = "SELECT t.no_faktur, u.nama_lengkap AS nama_kasir, " +
+                     "COALESCE(p.nama_pelanggan, 'Pelanggan Umum') AS nama_pelanggan, " +
+                     "t.total_akhir " +
+                     "FROM transaksi t " +
+                     "LEFT JOIN users u ON t.id_user = u.id_user " +
+                     "LEFT JOIN pelanggan p ON t.id_pelanggan = p.id_pelanggan " +
+                     "ORDER BY t.no_faktur DESC";
+
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Object[] baris = {
+                    rs.getString("no_faktur"),
+                    rs.getString("nama_kasir"),
+                    rs.getString("nama_pelanggan"),
+                    rs.getDouble("total_akhir")
+                };
+                listRiwayat.add(baris);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error mengambil riwayat transaksi: " + e.getMessage());
+        }
+        return listRiwayat;
     }
 }
