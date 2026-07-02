@@ -8,6 +8,7 @@ import com.pos.entity.User;
 import com.pos.service.UserService;
 import com.pos.view.LoginForm;
 import javax.swing.JOptionPane;
+import com.pos.view.DashboardForm;
 
 public class LoginController {
     private final UserService userService;
@@ -30,6 +31,8 @@ public class LoginController {
                         "Selamat Datang, " + userTerautentikasi.getNamaLengkap() + " (" + userTerautentikasi.getRole() + ")!", 
                         "Login Sukses", JOptionPane.INFORMATION_MESSAGE);
                 
+                DashboardForm dashboard = new DashboardForm(userTerautentikasi.getRole());
+                dashboard.setVisible(true);
                 loginForm.dispose();
                 
             } else {
