@@ -8,9 +8,12 @@ import javax.swing.*;
 
 public class DashboardForm extends JFrame {
     
+    private int idUserAktif;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardForm.class.getName());
     
-    public DashboardForm(String role) {
+    public DashboardForm(String role, int idUserAktif) {
+        this.idUserAktif = idUserAktif;
         setTitle("Point of Sales - Dashboard");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,6 +35,10 @@ public class DashboardForm extends JFrame {
         
         JMenu menuTransaksi = new JMenu("Transaksi");
         JMenuItem itemPenjualan = new JMenuItem("Penjualan Baru");
+        itemPenjualan.addActionListener(e -> {
+            TransaksiForm formTransaksi = new TransaksiForm(this, idUserAktif);
+            formTransaksi.setVisible(true);
+        });
         JMenuItem itemRiwayat = new JMenuItem("Riwayat Penjualan");
 
         menuMaster.add(itemBarang);
@@ -134,7 +141,7 @@ public class DashboardForm extends JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new DashboardForm("Admin").setVisible(true);
+            new DashboardForm("Admin", 1).setVisible(true);
         });
     }
 

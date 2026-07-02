@@ -31,7 +31,7 @@ public class LoginController {
                         "Selamat Datang, " + userTerautentikasi.getNamaLengkap() + " (" + userTerautentikasi.getRole() + ")!", 
                         "Login Sukses", JOptionPane.INFORMATION_MESSAGE);
                 
-                DashboardForm dashboard = new DashboardForm(userTerautentikasi.getRole());
+                DashboardForm dashboard = new DashboardForm(userTerautentikasi.getRole(), userTerautentikasi.getIdUser());
                 dashboard.setVisible(true);
                 loginForm.dispose();
                 
