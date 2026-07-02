@@ -12,6 +12,7 @@ Aplikasi kasir sederhana berbasis Java Swing dengan arsitektur MVC.
 1. Pastikan XAMPP terinstall dan Apache & MySQL aktif.
 2. Import database `point_of_sales.sql` ke phpMyAdmin.
 3. Jalankan aplikasi dengan netbeans dan melakukan run pada file java 'main'
+4. Gunakan Username 'admin' dan Password 'admin123' agar login berhasil dan dapat masuk kedalam sistem
    
 
 ## Persyaratan
