@@ -7,19 +7,17 @@
  *
  * @author User
  */
-import com.pos.database.DatabaseConnection;
-import java.sql.Connection;
+import com.pos.view.LoginForm;
+import javax.swing.SwingUtilities;
 
 public class main {
     public static void main(String[] args) {
-        System.out.println("Memulai aplikasi POS...");
-
-        Connection conn = DatabaseConnection.getInstance().getConnection();
-
-        if (conn != null) {
-            System.out.println("Aplikasi siap digunakan dan terhubung ke database!");
-        } else {
-            System.out.println("Aplikasi gagal terhubung ke database. Periksa konfigurasi XAMPP/MySQL Anda.");
-        }
+        // Menjalankan GUI Swing di dalam thread yang aman (Event Dispatch Thread)
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new LoginForm().setVisible(true);
+            }
+        });
     }
 }
